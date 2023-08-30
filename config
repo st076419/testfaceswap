@@ -1,0 +1,8 @@
+./aws/credentials
+[default]
+aws_access_key_id = 93c1888666f6478db1d9a0659c1f3027
+aws_secret_access_key = f7b95a888d0a4ae381f43bb165f43416
+
+./aws/config
+region=us-east-1
+[s3] use-sigv4 = True

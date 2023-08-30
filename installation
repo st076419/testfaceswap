@@ -1,0 +1,73 @@
+pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html / LINUX
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch / WINDOWS + conda
+pip install --ignore-installed imageio
+pip install opencv-python==4.1.2.30
+pip install insightface==0.2.1 onnxruntime moviepy
+pip install onnx==1.11.0
+
+``1.13.0``               | ``0.14.1``
+
+git clone git@github.com:neuralchen/SimSwap.git network
+download antelope.zip from https://onedrive.live.com/?authkey=%21ADJ0aAOSsc90neY&cid=4A83B6B633B029CC&id=4A83B6B633B029CC%215837&parId=4A83B6B633B029CC%215834&action=locate
+create ./network/insightface_func/models
+unzip antelope.zip to ./insightface_func/models (./insightface_func/models/antelope/[files])
+download 79999_iter.pth from https://drive.google.com/file/d/154JgKpzCPW82qINcVieuPH3fZ2e0P812/view
+move 79999_iter.pth to ./parsing_model/checkpoint
+download arcface_checkpoint.tar
+move arcface_checkpoint.tar to ./arcface_model
+download checkpoints.zip
+unzip checkpoints.zip to ./checkpoints (./checkpoints/people/...)
+python test_wholeimage_swapspecific.py --crop_size 224 --use_mask  --name people --Arc_path arcface_model/arcface_checkpoint.tar --pic_a_path ./demo_file/Iron_man.jpg --pic_b_path ./demo_file/multi_people.jpg --output_path ./output/ --pic_specific_path ./demo_file/specific2.png
+
+TO RESOLVE PROBLEMS
+pip install protobuf==3.20.*
+delete logoclass from test_wholeimage_swapspecific.py
+
+
+
+
+pip3 install awscli
+pip3 install awscli-plugin-endpoint
+# CREATE CONFIG
+
+pip install flask-mysqldb
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+pip install mysqlclient
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+sudo mysql_secure_installation
+
+
+CREATE DATABASE faceswap;
+USE faceswap;
+
+pip install onnx==1.11.0
+pip install opencv-python==4.1.2.30
+ CREATE USER 'faceswap'@'localhost' IDENTIFIED BY 'tanyabor5'
+
+# БД:
+# photo_with_face: string [URL]
+# photo_with_character: string [URL]
+# swapped_photo: string [URL]
+CREATE TABLE Images (
+    ImageWithFace varchar(512) NOT NULL,
+    ImageWithCharacter varchar(255) NOT NULL,
+    SwappedFacesImage varchar(255),
+    PRIMARY KEY(ImageWithFace, ImageWithCharacter)
+);
+
+INSERT INTO Images (ImageWithFace, ImageWithCharacter, SwappedFacesImage)
+VALUES ('check1', 'check2', NULL);
+
+SELECT SwappedPhoto FROM Photos
+WHERE PhotoWithFace = 'check1' AND PhotoWithCharacter = 'check2';
+
+UPDATE Photos
+SET SwappedPhoto = 'new_value'
+WHERE PhotoWithFace = 'check1' AND PhotoWithCharacter = 'check2';
+
+
+systemctl start mysql.service
+mysql -u faceswap -p
+
+flask --app server --debug run
